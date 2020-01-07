@@ -9,7 +9,7 @@ import Layout from '../components/layout';
 
 const VideoTemplate = (props) => {
 
-    
+  const videoContent = props.data.datoCmsVideo
 
     const Content = styled.div`
     max-width: 80rem;
@@ -51,7 +51,23 @@ const VideoTemplate = (props) => {
         <Layout> 
          
         <Content>
-                        
+        <h1 >{videoContent.title}</h1>
+            
+            <Iframe >
+            <iframe className ='frame' title = {videoContent.title} src={props.data.datoCmsVideo.videoUrl}
+                 frameborder="0"   width="960" height="540"  allowfullscreen="allowfullscreen"></iframe>
+            </Iframe>     
+            <Text >
+            <p>Główny utwór: </p><h3>{videoContent.lyric.artists}</h3>
+            <Title> {videoContent.lyric.title}</Title>
+            
+            <Excerpt dangerouslySetInnerHTML={
+            {__html: `${videoContent.lyric.textNode.childMarkdownRemark.excerpt}`} }/>
+            <Title> {videoContent.lyric.polskiTytu} </Title>
+            <Excerpt dangerouslySetInnerHTML={
+            {__html: `${videoContent.lyric.polskiTekstNode.childMarkdownRemark.excerpt}`} }/>
+            <p  className = 'link' onClick={() => navigate(`/text/${videoContent.lyric.slug}`)}>Cały utwór</p>
+            </Text>              
            
         </Content>
        
@@ -61,6 +77,34 @@ const VideoTemplate = (props) => {
 }
 
 export default VideoTemplate;
+
+export const query = graphql`
+        query VideoTemplate($id: String!){
+            datoCmsVideo(id: {eq: $id}) {
+                id
+                slug
+                title
+                videoUrl
+                lyric {
+                  artists
+                  title   
+                  textNode {
+                    childMarkdownRemark {
+                      excerpt
+                    }
+                  }
+                  polskiTytu
+                  polskiTekstNode {
+                    childMarkdownRemark {
+                      excerpt
+                    }
+                  }
+                  slug
+                }
+              }
+
+        }`
+
 
 
 

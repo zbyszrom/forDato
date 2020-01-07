@@ -1,3 +1,6 @@
+require('dotenv').config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
 module.exports = {
   siteMetadata: {
     title: `Video with Datocms`,
@@ -21,7 +24,7 @@ module.exports = {
       options: {
         // You can find your read-only API token under the Settings > API tokens
         // section of your administrative area:
-        apiToken: `2598e2a5191d04703bd216796d159b`
+        apiToken: process.env.DATO_API_TOKEN
      }
     },
     
