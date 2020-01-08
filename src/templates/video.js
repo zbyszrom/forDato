@@ -66,7 +66,7 @@ const VideoTemplate = (props) => {
             <Title> {videoContent.lyric.polskiTytu} </Title>
             <Excerpt dangerouslySetInnerHTML={
             {__html: `${videoContent.lyric.polskiTekstNode.childMarkdownRemark.excerpt}`} }/>
-            <p  className = 'link' onClick={() => navigate(`/text/${videoContent.lyric.slug}`)}>Cały utwór</p>
+            {/*<p  className = 'link' onClick={() => navigate(`/text/${videoContent.lyric.slug}`)}>Cały utwór</p>*/}
             </Text>              
            
         </Content>
